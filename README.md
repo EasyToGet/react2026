@@ -15,19 +15,42 @@ node -v
 ```bash
 npm create vite@latest
 ```
-流程: Project name: xxxxxx > Select a framework: React > Select a variant: JavaScript > Which linter to use: ESLint > Install with npm and start now: no
+流程:
+```bash
+Project name: xxxxxx
+Select a framework: React
+Select a variant: JavaScript
+Which linter to use: ESLint
+Install with npm and start now: no
+```
 
 ### 安裝 npm 套件並運行
-流程: cd xxx-project > npm install > npm run dev
+流程:
+```bash
+cd xxx-project
+npm install
+npm run dev
+```
 
 ### 建立 Git 版本控制
-流程: git init > git add . > git commit -m "feat: 新增 XXXXXX" > 檢查 log: git log
+流程:
+```bash
+git init
+git add .
+git commit -m "feat: 新增 XXXXXX"
+檢查 log: git log
+```
 
 ## Vite 專案部屬
 網址: https://github.com/
 
 ### 建立 github 新專案
-流程: github 首頁 > Repositories > New > Repository name: XXXXXX > Create repository
+流程:
+1. github 首頁
+2. Repositories
+3. New
+4. Repository name: XXXXXX
+5. Create repository
 
 ### 部屬本地專案到 github
 指令:
@@ -58,10 +81,16 @@ npm install gh-pages
 ```
 
 ### 部屬 gh-pages
-流程: npm run build > npm run deploy
-
 > npm run build 是建立 dist 檔
-> npm run deploy 是將 dist 部屬到 github
+> npm run deploy 是將 dist 部屬到 github  
+
+流程:  > 
+```bash
+npm run build
+npm run deploy
+```
+
+
 
 ### 修改專案路徑
 #### 修改 vite.config.js
@@ -94,6 +123,18 @@ npm install axios
 ```
 
 ### 寫入 axios
+> 使用 useEffect 必須寫入 `import { useState, useEffect } from 'react'`  
+> 使用 axios 必須寫入 `import axios from 'axios' `  
+> 測試 axios 程式碼  
+```jsx
+useEffect(() => {
+  (async () => {
+    const res = await axios.get('https://randomuser.me/api/');
+    console.log(res);
+  })()
+}, [])
+```
+
 **修改 App.jsx**  
 ```jsx
 //  載入外部資源
@@ -125,16 +166,4 @@ function App() {
 }
 
 export default App
-```
-
-> 使用 useEffect 必須寫入 `import { useState, useEffect } from 'react'`  
-> 使用 axios 必須寫入 `import axios from 'axios' `  
-> 測試 axios 程式碼  
-```jsx
-useEffect(() => {
-  (async () => {
-    const res = await axios.get('https://randomuser.me/api/');
-    console.log(res);
-  })()
-}, [])
 ```
