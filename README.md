@@ -18,16 +18,16 @@ npm create vite@latest
 ```
 流程: Project name: xxxxxx > Select a framework: React > Select a variant: JavaScript > Which linter to use: ESLint > Install with npm and start now: no
 
-3. 安裝 npm 套件並運行
+3. 安裝 npm 套件並運行  
 流程: cd xxx-project > npm install > npm run dev
 
-4. 建立 Git 版本控制
+4. 建立 Git 版本控制  
 流程: git init > git add . > git commit -m "feat: 新增 XXXXXX" > 檢查 log: git log
 
 ### Vite 專案部屬
 網址: https://github.com/
 
-1. 建立 github 新專案
+1. 建立 github 新專案  
 流程: github 首頁 > Repositories > New > Repository name: XXXXXX > Create repository
 
 2. 部屬本地專案到 github
@@ -45,7 +45,7 @@ git push -u origin main
 npm install gh-pages
 ```
 
-2. 修改 package.json 
+2. 修改 package.json
 ```json
 {
   "scripts": {
@@ -58,14 +58,14 @@ npm install gh-pages
 }
 ```
 
-3. 部屬 gh-pages 
+3. 部屬 gh-pages  
 流程: npm run build > npm run deploy
 
-- npm run build 是建立 dist 檔
-- npm run deploy 是將 dist 部屬到 github
+> npm run build 是建立 dist 檔
+> npm run deploy 是將 dist 部屬到 github
 
 4. 修改專案路徑
-- 修改 vite.config.js 
+**修改 vite.config.js** 
 
 ```jsx
 import react from '@vitejs/plugin-react'
