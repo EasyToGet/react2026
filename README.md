@@ -387,3 +387,77 @@ function App() {
   );
 }
 ```
+
+## 環境變數設定
+### `env` 全設定
+1. 在專案新建 `env` 檔
+2. `env` 寫入 `VITE_APP_PATH=https://randomuser.me/api/`
+3. `App.jsx` 寫入 `const { VITE_APP_PATH } = import.meta.env;`
+4. `async ()` 裡改成 `const res = await axios.get(VITE_APP_PATH);`
+5. `npm run dev` 執行開發模式
+
+程式碼:
+```jsx
+import { useState, useEffect, useRef } from "react";
+import { Modal } from 'bootstrap'
+...
+
+const { VITE_APP_PATH } = import.meta.env;  //  新加入
+
+function App() {
+  ...
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get(VITE_APP_PATH);   //  修改處
+      console.log(res);
+      openModal();
+
+      setTimeout(() => {
+        closeModal();
+      }, 2000);
+    })()
+  }, [])
+
+  ...
+
+  return (
+    <>
+      ...
+    </>
+  );
+}
+```
+
+### `.env.development` 設定
+1. 把原本 `env` 檔改成 `.env.development`
+2. `VITE_APP_PATH` 的 `API` 是開發用資料
+3. 執行開發模式 `npm run dev`
+
+程式碼:
+```bash
+VITE_APP_PATH=https://randomuser.me/api/    #開發用資料
+```
+
+### `.env.production` 設定
+1. 把原本 `env` 檔改成 `.env.production`
+2. `VITE_APP_PATH` 的 `API` 是上線產品用資料
+3. 執行編譯 `npm run build`, 編譯 dist 檔
+4. 預覽網站 `npm run preview` 
+
+程式碼:
+```bash
+VITE_APP_PATH=https://jsonplaceholder.typicode.com/posts/    #上線產品資料
+```
+
+### `.env.development.local` 設定
+1. 把原本 `env` 檔改成 `.env.development.local`
+2. `VITE_APP_PATH` 的 `API` 是開發用資料
+3. 執行開發模式 `npm run dev`
+
+程式碼:
+```bash
+VITE_APP_PATH=https://randomuser.me/api/    #開發用資料
+
+```
+> 檔名後面加 local 主要是避免上傳到 github 的一個小技巧

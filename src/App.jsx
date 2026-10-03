@@ -7,6 +7,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 
+const { VITE_APP_PATH } = import.meta.env;
+
 function App() {
   const [count, setCount] = useState(0)
   const modalRef = useRef(null);
@@ -22,7 +24,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get('https://randomuser.me/api/');
+      const res = await axios.get(VITE_APP_PATH);
       console.log(res);
       openModal();
 
