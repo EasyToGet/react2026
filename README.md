@@ -2,7 +2,11 @@
 
 ## Node.js 安裝
 網址: https://nodejs.org/en  
-流程: node.js 首頁 > Get Node.js > Windows Installer(.msi) > 安裝 LTS 版本
+流程:  
+1. node.js 首頁
+2. Get Node.js
+3. Windows Installer(.msi)
+4. 安裝 LTS 版本
 
 ## Vite 環境建立
 網址: https://vite.dev/
@@ -316,3 +320,70 @@ createRoot(document.getElementById('root')).render(
 )
 ```
 
+### 使用 Bootstrap function
+流程:  
+1. 移除 `main.jsx` 的 `import 'bootstrap'`
+2. 移除 `App.jsx` 裡 `button` 元素中的 `data-bs-toggle="modal"`, `data-bs-target="#exampleModal"`, `className="modal fade"` 中的 `id="exampleModal"`
+3. 加入 `import { useState, useEffect, useRef } from "react";`
+4. 加入 `const modalRef = useRef(null);`, `className="modal fade"` 中加入 `ref={modalRef}`
+5. 加入 `const customModal = useRef(null);`, `import { Modal } from 'bootstrap'`
+6. 加入 `useEffect(() => {customModal.current = new Modal(modalRef.current);}, [])`
+7. 加入 `const openModal = () => {customModal.current.show();};`
+8. `button` 元素中加入 `onClick={() => openModal()}`
+9. 加入 `const closeModal = () => {customModal.current.hide();};`
+10. `async ()` 裡再加入 `openModal();`,`setTimeout(() => {closeModal();}, 2000);`
+11. 最後呈現是載入網站會先打開 `Modal`, 過兩秒後自動關閉 `Modal`
+
+```jsx
+import { useState, useEffect, useRef } from "react";
+import { Modal } from 'bootstrap'
+
+function App() {
+  ...
+  const modalRef = useRef(null);
+  const customModal = useRef(null);
+
+  const openModal = () => {
+    customModal.current.show();
+  };
+
+  const closeModal = () => {
+    customModal.current.hide();
+  };
+
+  useEffect(() => {
+    (async () => {
+      ...
+      openModal();
+
+      setTimeout(() => {
+        closeModal();
+      }, 2000);
+    })()
+  }, [])
+
+  useEffect(() => {
+    customModal.current = new Modal(modalRef.current);
+  }, [])
+
+  return (
+    <>
+      <section id="center">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => openModal()}
+        >
+          Launch demo modal
+        </button>
+        <div
+          className="modal fade"
+          ref={modalRef}
+          ...
+        >
+          ...
+      </section>
+    </>
+  );
+}
+```

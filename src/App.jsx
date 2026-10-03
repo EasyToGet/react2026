@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from "react";
 import axios from 'axios'
+import { Modal } from 'bootstrap'
 
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
@@ -8,29 +9,66 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const modalRef = useRef(null);
+  const customModal = useRef(null);
+
+  const openModal = () => {
+    customModal.current.show();
+  };
+
+  const closeModal = () => {
+    customModal.current.hide();
+  };
 
   useEffect(() => {
     (async () => {
       const res = await axios.get('https://randomuser.me/api/');
       console.log(res);
+      openModal();
+
+      setTimeout(() => {
+        closeModal();
+      }, 2000);
     })()
+  }, [])
+
+  useEffect(() => {
+    // console.log(modalRef.current);
+    customModal.current = new Modal(modalRef.current);
+    // customModal.current.show();
   }, [])
 
   return (
     <>
       <section id="center">
-        <button
+        {/* <button
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
           Launch demo modal
+        </button> */}
+
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => openModal()}
+        >
+          Launch demo modal
         </button>
+
+        {/* <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >*/}
 
         <div
           className="modal fade"
-          id="exampleModal"
+          ref={modalRef}
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
