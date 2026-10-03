@@ -84,7 +84,7 @@ npm install gh-pages
 > npm run build 是建立 dist 檔
 > npm run deploy 是將 dist 部屬到 github  
 
-流程:  > 
+流程:
 ```bash
 npm run build
 npm run deploy
@@ -166,4 +166,42 @@ function App() {
 }
 
 export default App
+```
+
+## 加入 Sass
+
+### 安裝 Sass
+```bash
+npm add -D sass
+```
+
+### 新增 all.scss
+路徑: `src/assets/all.scss`  
+
+寫入樣式:
+```scss
+$primary-bg: green;
+
+body {
+  background-color: $primary-bg;
+}
+```
+
+
+### 修改 main.jsx
+> 註解或刪除 `import './index.css'`  
+> 載入 `import './assets/all.scss'`
+
+```jsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+// import './index.css'   //  註解或刪除
+import App from './App.jsx'
+import './assets/all.scss'  //  載入 all.scss
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
 ```
